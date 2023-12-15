@@ -14,12 +14,19 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     public function showLogin(){
+        if(Auth::check()){
+            return redirect('/');
+        }
         return view('pages.auth.login');
+
     }
     public function showRegister(){
+        if(Auth::check()){
+            return redirect('/');
+        }
         return view('pages.auth.register');
     }
-    public function register(RegisterRequest $request){
+    public function store(RegisterRequest $request){
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -28,7 +35,7 @@ class AuthController extends Controller
         return redirect('/login')->with('status', 'Successfully created account!');
     }
 
-    public function login(LoginRequest $request){
+    public function index(LoginRequest $request){
         if(Auth::check()){
             return redirect('/login')->withErrors('You are already logged in!');
         }
@@ -39,7 +46,7 @@ class AuthController extends Controller
 
         return redirect('/')->with('status', 'Login success!');
 }
-    public function logout(){
+    public function destory(){
        Session::flush();
        Auth::logout();
 

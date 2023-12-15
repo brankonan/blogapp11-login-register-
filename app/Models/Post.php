@@ -13,5 +13,10 @@ class Post extends Model
         'title',
         'body',
         'isPublished'
+        
     ];
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class, 'tag_post');
+    }
 }
