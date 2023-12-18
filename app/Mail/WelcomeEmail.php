@@ -16,7 +16,7 @@ class WelcomeEmail extends Mailable
     public $userId;
     public function __construct($userId)
     {
-        $this->userId;
+        $this->userId = $userId;
     }
     public function build()
     {

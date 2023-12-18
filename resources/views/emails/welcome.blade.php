@@ -9,6 +9,6 @@
 <body>
     <h1>Welcome to Blogapp!</h1>
     <p>Thank you for joining!</p>
-    <a href="http://localhost:8000/verifyemail/{{ $userId }}"></a>
+    <a href="http://localhost:8000/verifyemail/{{ $userId }}">Click here to verify email</a>
 </body>
 </html>
