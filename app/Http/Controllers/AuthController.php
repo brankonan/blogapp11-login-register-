@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -27,11 +29,12 @@ class AuthController extends Controller
         return view('pages.auth.register');
     }
     public function store(RegisterRequest $request){
-        User::create([
+       $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+        Mail::to($user->email)->send(new WelcomeEmail($user->id));
         return redirect('/login')->with('status', 'Successfully created account!');
     }
 

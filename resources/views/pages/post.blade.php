@@ -11,7 +11,7 @@
     @foreach ($post->tags as $tag)
         <a href="/tags/{{ $tag->name }}" class="badge rounded-pill text-bg-secondary">{{ $tag->name }}</a>        
     @endforeach
-    @if (auth()->id() === $post->user_id)
+    @if (auth()->user() &&  auth()->user()->id === $post->user_id)
         <form action="{{ url('posts/' . $post->id) }}" method="POST">
             @csrf
             @method('PUT')
