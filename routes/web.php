@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ Route::get('/', function () {
 Route::resource('/posts', 'App\Http\Controllers\PostsController');
 Route::resource('/auth', 'App\Http\Controllers\AuthController');
 Route::resource('/tags', 'App\Http\Controllers\TagController');
+Route::resource('/comments', 'App\Http\Controllers\CommentsController');
 
 
 Route::middleware('notauthentificated')->group(function (){
